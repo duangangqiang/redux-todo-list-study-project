@@ -1,5 +1,6 @@
 import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, COMPLETE_ALL, CLEAR_COMPLETED } from '../constants/ActionTypes';
 
+// 默认给todos一个默认项
 const initialState = [
     {
         text: 'Use Redux',
@@ -22,11 +23,7 @@ export default function todos(state = initialState, action) {
         case DELETE_TODO:
             return state.filter(todo => todo.id !== action.id);
         case COMPLETE_TODO:
-            return state.map(todo => 
-                todo.id === action.id ?
-                    {...todo, completed: !todo.completed} :
-                    todo
-            )
+            return state.map(todo => todo.id === action.id ? {...todo, completed: !todo.completed} : todo)
         case COMPLETE_ALL:
             const areAllMarked = state.every(todo => todo.completed);
             return state.map(todo => ({
